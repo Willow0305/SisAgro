@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Informante, Estabelecimento, Item, Questionario
+from models import Informante, Estabelecimento, Item, Questionario
 
 class InformanteSerializer(serializers.ModelSerializer):
     class Meta:

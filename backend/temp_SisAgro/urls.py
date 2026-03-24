@@ -16,12 +16,4 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import InformanteView, EstabelecimentoView, ItemView, QuestionarioView
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('informantes/', InformanteView.as_view(), name='informantes'),
-    path('estabelecimentos/', EstabelecimentoView.as_view(), name='estabelecimentos'),
-    path('itens/', ItemView.as_view(), name='itens'),
-    path('questionarios/', QuestionarioView.as_view(), name='questionarios'),
-]
+from views import InformanteView, EstabelecimentoView, ItemView, QuestionarioView
