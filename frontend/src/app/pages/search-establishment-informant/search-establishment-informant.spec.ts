@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchEstablishmentInformant } from './search-establishment-informant';
+import { SearchEstablishmentInformantComponent } from './search-establishment-informant.component';
 
-describe('SearchEstablishmentInformant', () => {
-  let component: SearchEstablishmentInformant;
-  let fixture: ComponentFixture<SearchEstablishmentInformant>;
+describe('SearchEstablishmentInformantComponent', () => {
+  let component: SearchEstablishmentInformantComponent;
+  let fixture: ComponentFixture<SearchEstablishmentInformantComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SearchEstablishmentInformant],
+      imports: [SearchEstablishmentInformantComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SearchEstablishmentInformant);
+    fixture = TestBed.createComponent(SearchEstablishmentInformantComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

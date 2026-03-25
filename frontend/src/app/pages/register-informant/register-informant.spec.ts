@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegisterInformant } from './register-informant';
+import { RegisterInformantComponent } from './register-informant.component';
 
-describe('RegisterInformant', () => {
-  let component: RegisterInformant;
-  let fixture: ComponentFixture<RegisterInformant>;
+describe('RegisterInformantComponent', () => {
+  let component: RegisterInformantComponent;
+  let fixture: ComponentFixture<RegisterInformantComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RegisterInformant],
+      imports: [RegisterInformantComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(RegisterInformant);
+    fixture = TestBed.createComponent(RegisterInformantComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

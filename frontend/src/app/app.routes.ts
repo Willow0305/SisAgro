@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login';
-import { MainComponent } from './pages/main/main';
-import { RegisterInformantComponent } from './pages/register-informant/register-informant';
-import { RegisterEstablishmentComponent } from './pages/register-establishment/register-establishment';
-import { SearchEstablishmentInformantComponent } from './pages/search-establishment-informant/search-establishment-informant';
-import { ItemSelectionComponent } from './pages/item-selection/item-selection';
-import { QuestionnaireComponent } from './pages/questionnaire/questionnaire';
+import { LoginComponent } from './pages/login/login.component';
+import { MainComponent } from './pages/main/main.component';
+import { RegisterInformantComponent } from './pages/register-informant/register-informant.component';
+import { RegisterEstablishmentComponent } from './pages/register-establishment/register-establishment.component';
+import { SearchEstablishmentInformantComponent } from './pages/search-establishment-informant/search-establishment-informant.component';
+import { ItemSelectionComponent } from './pages/item-selection/item-selection.component';
+import { QuestionnaireComponent } from './pages/questionnaire/questionnaire.component';
 
 export const routes: Routes = [
   { path: '', component: MainComponent },
