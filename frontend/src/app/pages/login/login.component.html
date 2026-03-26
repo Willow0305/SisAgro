@@ -1,14 +1,42 @@
-<div class="login-container">
-  <h1>Login</h1>
-  <form (ngSubmit)="onSubmit()">
-    <div>
-      <label for="username">Username:</label>
-      <input type="text" id="username" [(ngModel)]="username" name="username" required>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<div class="login_fundo">
+
+  <main class="login-container">
+
+    <!-- Logo + Nome -->
+    <div class="logo-area">
+      <div class="logo-icon"><img src="images/logo_IBGE_copia.jpg" alt="Logo IBGE"></div>
+      <div><h1>SisAgro</h1></div>
     </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" id="password" [(ngModel)]="password" name="password" required>
-    </div>
-    <button type="submit">Login</button>
-  </form>
+
+    <!-- Formulário -->
+    <form (ngSubmit)="onSubmit()">
+
+      <div class="input-group">
+        <label>Usuário:</label>
+        <input 
+          type="text" 
+          [(ngModel)]="username" 
+          name="username" 
+          required>
+      </div>
+
+      <div class="input-group">
+        <label>Senha:</label>
+        <input 
+          type="password" 
+          [(ngModel)]="password" 
+          name="password" 
+          required>
+      </div>
+
+      <div class="button">
+        <button type="submit">Entrar</button>
+      </div>
+      
+    </form>
+
+  </main>
+
 </div>
