@@ -8,8 +8,9 @@ import { ItemSelectionComponent } from './pages/item-selection/item-selection.co
 import { QuestionnaireComponent } from './pages/questionnaire/questionnaire.component';
 
 export const routes: Routes = [
-  { path: '', component: MainComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'main', component: MainComponent },
   { path: 'register-informant', component: RegisterInformantComponent },
   { path: 'register-establishment', component: RegisterEstablishmentComponent },
   { path: 'search-establishment-informant', component: SearchEstablishmentInformantComponent },

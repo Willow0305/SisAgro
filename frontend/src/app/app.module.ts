@@ -1,3 +1,12 @@
-// Este arquivo não é necessário. O projeto usa standalone components com bootstrapApplication.
-// Todos os componentes estão definidos como standalone: true
-// As rotas estão em app.routes.ts
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { routes } from './app.routes';
+
+@NgModule({
+  imports: [
+    RouterModule.forRoot(routes),
+    // ...existing imports...
+  ],
+  // ...existing code...
+})
+export class AppModule {}
