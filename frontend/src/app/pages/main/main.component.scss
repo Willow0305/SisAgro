@@ -1,4 +1,146 @@
-.main-container {
-  text-align: center;
-  margin-top: 50px;
+$azul: #124f7f;
+$verde: #1f7a3f;
+$vermelho: #c0392b;
+
+.container {
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: $azul;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  img {
+    width: 21%;              
+  }
+}
+
+/* USER MENU */
+.user-menu {
+  position: relative;
+  cursor: pointer;
+  font-size: 17px;
+  
+  span {
+    display: flex;
+    align-items: center;
+    gap: 5px
+  }
+
+  .dropdown {
+    position: absolute;
+    right: 0;
+    top: 30px;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    width: 180px;
+
+    button {
+      width: 100%;
+      margin: 5px 0;
+      padding: 8px;
+      border: none;
+      background: $azul;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &.logout {
+        background: $vermelho;
+      }
+    }
+  }
+  
+}
+
+/* TABS */
+.tabs {
+  margin: 20px 0;
+
+  button {
+    margin-right: 10px;
+    padding: 10px;
+    border: none;
+    background: #ccc;
+    cursor: pointer;
+    border-radius: 5px;
+
+    &.active {
+      background: $verde;
+      color: white;
+    }
+  }
+}
+
+/* CONTENT */
+.content {
+  background: $azul;
+  padding: 20px;
+  border-radius: 10px;
+  min-height: calc(90vh - 120px);
+  
+}
+
+.card {
+  background: #dcdcdc;
+  padding: 20px;
+  border-radius: 10px;
+  width: 45%;
+  max-width: 800px;
+  min-height: 640px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.grafico {
+  background: #eee;
+  margin: 20px 0;
+  border-radius: 10px;
+
+  flex: 9; /* 70% */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.botoes {
+  //flex: 1; /* 30% */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  button {
+    background: $azul;
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+
+.user-menu i {
+  font-size: 34px;
+}
+
+#down-icon {
+  font-size: 20px;
 }
