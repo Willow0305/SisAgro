@@ -1,3 +1,67 @@
-<div class="main-container">
-  <h1>Welcome to the Main Page</h1>
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="topbar">
+
+    <!-- You can use a <span> element, with classes applied in the same way -->
+    <script src="https://kit.fontawesome.com/04349dc37e.js" crossorigin="anonymous"></script>
+
+
+    <div class="logo-area">
+      <img src="images\logo_IBGE_copia.jpg" alt="Logo">
+      <h1>SisAgro</h1>
+    </div>
+
+    <h2>Menu Principal</h2>
+
+    <div class="user-menu" (click)="toggleMenu()">
+    
+      <span> 
+        <i class="bi bi-person-badge-fill fs-6"></i>Seja Bem Vindo, {{ usuario }} <i class="bi bi-caret-down-fill" id="down-icon"></i>
+      </span>
+
+      <div class="dropdown" *ngIf="menuAberto">
+        <button>Minha Conta</button>
+        <button>Configurações</button>
+        <button class="logout">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button [class.active]="aba === 'visao'" (click)="mudarAba('visao')">Visão Geral</button>
+    <button [class.active]="aba === 'relatorios'" (click)="mudarAba('relatorios')">Relatórios</button>
+  </div>
+
+  <!-- CONTEÚDO -->
+  <div class="content">
+
+    <!-- VISÃO GERAL -->
+    <div *ngIf="aba === 'visao'" class="card">
+      <h3>Visão Geral</h3>
+
+      <div class="grafico">
+        <canvas id="grafico1"></canvas>
+      </div>
+
+      <div class="botoes">
+        <button>Novo Informante</button>
+        <button>Relatórios</button>
+        <button>+ Produto</button>
+        <button>Novo Estabelecimento</button>
+        <button>Nova Pesquisa</button>
+      </div>
+    </div>
+
+    <!-- RELATÓRIOS -->
+    <div *ngIf="aba === 'relatorios'" class="card">
+      <h3>Relatórios</h3>
+
+      <div class="grafico">
+        <canvas id="grafico2"></canvas>
+      </div>
+    </div>
+
+  </div>
 </div>
