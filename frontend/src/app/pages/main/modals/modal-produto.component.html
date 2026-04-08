@@ -1,0 +1,66 @@
+<div class="modal-overlay" (click)="fechar()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Novo Produto</h2>
+      <button class="btn-close" (click)="fechar()">×</button>
+    </div>
+
+    <div class="modal-body">
+      <!-- ADICIONAR PRODUTO -->
+      <div class="form-section">
+        <h3>Adicionar Produto</h3>
+        <div class="form-group">
+          <input 
+            type="text" 
+            [(ngModel)]="novoProduto.nome"
+            placeholder="Nome do produto">
+          <select [(ngModel)]="novoProduto.pesquisa">
+            <option value="">Selecione a pesquisa</option>
+            <option *ngFor="let pesquisa of pesquisasList" [value]="pesquisa.id">
+              {{ pesquisa.nome }}
+            </option>
+          </select>
+          <button class="btn verde" (click)="adicionarProduto()">Salvar</button>
+        </div>
+        <div *ngIf="mensagem" [class]="'mensagem ' + tipoMensagem">
+          {{ mensagem }}
+        </div>
+      </div>
+
+      <!-- LISTA DE PRODUTOS -->
+      <div class="lista-section">
+        <h3>Produtos Cadastrados ({{ produtosList.length }})</h3>
+        <div class="lista-produtos">
+          <div *ngIf="produtosList.length === 0" class="vazio">
+            Nenhum produto cadastrado
+          </div>
+          <div *ngFor="let produto of produtosList" class="item-produto">
+            <div class="produto-info">
+              <span class="nome">{{ produto.nome }}</span>
+              <span class="pesquisa">{{ obterNomePesquisa(produto.pesquisa) }}</span>
+            </div>
+            <button class="btn-delete" (click)="confirmarExclusao(produto.id)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn vermelho" (click)="fechar()">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE CONFIRMAÇÃO DE EXCLUSÃO -->
+<div *ngIf="produtoParaExcluir" class="modal-overlay" (click)="cancelarExclusao()">
+  <div class="modal-content modal-confirmacao" (click)="$event.stopPropagation()">
+    <h3>Confirmar Exclusão</h3>
+    <p>Deseja realmente excluir este produto?</p>
+    <div class="botoes-confirmacao">
+      <button class="btn vermelho" (click)="excluirProduto()">Excluir</button>
+      <button class="btn verde" (click)="cancelarExclusao()">Cancelar</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="modal-overlay" (click)="fechar()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Nova Pesquisa</h2>
+      <button class="btn-close" (click)="fechar()">×</button>
+    </div>
+
+    <div class="modal-body">
+      <!-- ADICIONAR PESQUISA -->
+      <div class="form-section">
+        <h3>Adicionar Pesquisa</h3>
+        <div class="input-group">
+          <input 
+            type="text" 
+            [(ngModel)]="novaPesquisa"
+            placeholder="Nome da pesquisa"
+            (keyup.enter)="adicionarPesquisa()">
+          <button class="btn verde" (click)="adicionarPesquisa()">Salvar</button>
+        </div>
+        <div *ngIf="mensagem" [class]="'mensagem ' + tipoMensagem">
+          {{ mensagem }}
+        </div>
+      </div>
+
+      <!-- LISTA DE PESQUISAS -->
+      <div class="lista-section">
+        <h3>Pesquisas Cadastradas ({{ pesquisasList.length }})</h3>
+        <div class="lista-pesquisas">
+          <div *ngIf="pesquisasList.length === 0" class="vazio">
+            Nenhuma pesquisa cadastrada
+          </div>
+          <div *ngFor="let pesquisa of pesquisasList" class="item-pesquisa">
+            <span>{{ pesquisa.nome }}</span>
+            <button class="btn-delete" (click)="confirmarExclusao(pesquisa.id)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn vermelho" (click)="fechar()">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE CONFIRMAÇÃO DE EXCLUSÃO -->
+<div *ngIf="pesquisaParaExcluir" class="modal-overlay" (click)="cancelarExclusao()">
+  <div class="modal-content modal-confirmacao" (click)="$event.stopPropagation()">
+    <h3>Confirmar Exclusão</h3>
+    <p>Deseja realmente excluir esta pesquisa?</p>
+    <div class="botoes-confirmacao">
+      <button class="btn vermelho" (click)="excluirPesquisa()">Excluir</button>
+      <button class="btn verde" (click)="cancelarExclusao()">Cancelar</button>
+    </div>
+  </div>
+</div>
