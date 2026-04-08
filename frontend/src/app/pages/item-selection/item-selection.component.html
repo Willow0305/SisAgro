@@ -1,3 +1,47 @@
-<div class="item-selection-container">
-  <h1>Item Selection Page</h1>
+<div class="container">
+
+  <h1>Seleção de Itens</h1>
+
+  <div class="grid">
+
+    <!-- LSPA -->
+    <div class="card">
+      <h3>Pesquisa: LSPA/PAM</h3>
+      <ul>
+        <li *ngFor="let item of ['Abacaxi','Acerola','Açaí','Arroz','Amendoim','Banana']">
+          <span>{{item}}</span>
+          <input type="checkbox">
+        </li>
+      </ul>
+    </div>
+
+    <!-- PPM -->
+    <div class="card">
+      <h3>Pesquisa: PPM</h3>
+      <ul>
+        <li *ngFor="let item of ['Bovino','Bubalino','Ovino','Caprino','Equino']">
+          <span>{{item}}</span>
+          <input type="checkbox">
+        </li>
+      </ul>
+    </div>
+
+    <!-- PEVS -->
+    <div class="card">
+      <h3>Pesquisa: PEVS</h3>
+      <ul>
+        <li *ngFor="let item of ['Açaí','Borracha','Castanha','Carvão','Lenha']">
+          <span>{{item}}</span>
+          <input type="checkbox">
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="botoes">
+    <button class="btn vermelho">Voltar</button>
+    <button class="btn verde">Próximo</button>
+  </div>
+
 </div>

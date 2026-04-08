@@ -9,5 +9,4 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./item-selection.component.scss']
 })
 export class ItemSelectionComponent {
-  // Add your logic here
 }
