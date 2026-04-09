@@ -6,6 +6,8 @@ import { RegisterEstablishmentComponent } from './pages/register-establishment/r
 import { SearchEstablishmentInformantComponent } from './pages/search-establishment-informant/search-establishment-informant.component';
 import { ItemSelectionComponent } from './pages/item-selection/item-selection.component';
 import { QuestionnaireComponent } from './pages/questionnaire/questionnaire.component';
+import { ModalPesquisaComponent } from './pages/main/modals/modal-pesquisa.component'
+import { ModalProdutoComponent } from './pages/main/modals/modal-produto.component'
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -16,4 +18,6 @@ export const routes: Routes = [
   { path: 'search-establishment-informant', component: SearchEstablishmentInformantComponent },
   { path: 'item-selection', component: ItemSelectionComponent },
   { path: 'questionnaire', component: QuestionnaireComponent },
+  { path: 'nova-pesquisa', component: ModalPesquisaComponent },
+  { path: 'novo-produto', component: ModalProdutoComponent },
 ];

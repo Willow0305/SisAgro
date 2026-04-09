@@ -34,6 +34,26 @@ export class MainComponent implements AfterViewInit {
     this.router.navigate(['/login']);
   }
 
+  novoInformante() {
+    this.router.navigate(['/register-informant']);
+  }
+
+  novoEstabelecimento() {
+
+  }
+  
+  novaPesquisa() {
+    this.router.navigate(["/nova-pesquisa"]) 
+  }
+    
+  novoProduto() {
+
+  }
+    
+  relatorio() {
+
+  }
+
   ngAfterViewInit(): void {
     this.criarGraficos();
   }
