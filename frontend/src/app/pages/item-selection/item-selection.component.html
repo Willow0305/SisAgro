@@ -8,11 +8,10 @@
 
   <div class="grid">
 
-    <!-- LSPA -->
     <div *ngFor="let pesquisa of pesquisasList; trackBy: trackByPesquisa" class="card">
       <h3>Pesquisa: {{ pesquisa.nome }}</h3>
-      <ul *ngIf="pesquisa.produtos.length > 0; else semProdutos">
-        <li *ngFor="let produto of pesquisa.produtos || []; trackBy: trackByProduto">
+      <ul *ngIf="pesquisa.produtos && pesquisa.produtos.length > 0; else semProdutos">
+        <li *ngFor="let produto of pesquisa.produtos; trackBy: trackByProduto">
           <span>{{ produto.nome }}</span>
           <input type="checkbox">
         </li>
