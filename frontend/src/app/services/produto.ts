@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+
+interface ApiListResponse<T> {
+  value?: T[];
+  results?: T[];
+}
 
 export interface Produto {
   id: number;
@@ -14,30 +20,17 @@ export interface Produto {
   providedIn: 'root'
 })
 export class ProdutoService {
-  private apiUrl = 'http://localhost:8000/api/produtos/';
+  private apiUrl = `${environment.apiUrl}/api/produtos/`;
 
 
   constructor(private http: HttpClient) {}
 
-
-
   getProdutos(): Observable<Produto[]> {
-    return this.http.get<any>(this.apiUrl).pipe(
-      map((resp) => {
-        console.log('🔍 Produto Response:', resp);
-        let data = resp;
-        if (resp?.value) {
-          data = resp.value;
-          console.log('📦 Extraído de resp.value');
-        } else if (resp?.results) {
-          data = resp.results;
-          console.log('📦 Extraído de resp.results');
-        } else if (!Array.isArray(resp)) {
-          data = [];
-          console.warn('⚠️ Resposta não é array nem tem value/results');
-        }
-        console.log('✅ Dados finais:', data);
-        return Array.isArray(data) ? data : [];
+    return this.http.get<Produto[] | ApiListResponse<Produto>>(this.apiUrl).pipe(
+      map((response) => this.extrairLista(response)),
+      catchError((error) => {
+        console.error('Erro ao buscar produtos:', error);
+        return of([]);
       })
     );
   }
@@ -51,11 +44,24 @@ export class ProdutoService {
   }
 
   obterProdutosPorPesquisa(pesquisaId: number): Observable<Produto[]> {
-    return this.http.get<any>(`${this.apiUrl}?pesquisa=${pesquisaId}`).pipe(
-      map((resp) => {
-        if (Array.isArray(resp)) return resp as Produto[];
-        return (resp.results ?? resp.value ?? resp) as Produto[];
-      })
+    return this.getProdutos().pipe(
+      map((produtos) => produtos.filter((produto) => produto.pesquisa === pesquisaId))
     );
+  }
+
+  private extrairLista(response: Produto[] | ApiListResponse<Produto>): Produto[] {
+    if (Array.isArray(response)) {
+      return response;
+    }
+
+    if (Array.isArray(response.results)) {
+      return response.results;
+    }
+
+    if (Array.isArray(response.value)) {
+      return response.value;
+    }
+
+    return [];
   }
 }

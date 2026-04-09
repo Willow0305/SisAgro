@@ -2,46 +2,39 @@
 
   <h1>Seleção de Itens</h1>
 
+  <div *ngIf="erroCarregamento" class="mensagem-erro">
+    {{ erroCarregamento }}
+  </div>
+
   <div class="grid">
 
     <!-- LSPA -->
-    <div class="card">
-      <h3>Pesquisa: LSPA/PAM</h3>
-      <ul>
-        <li *ngFor="let item of ['Abacaxi','Acerola','Açaí','Arroz','Amendoim','Banana']">
-          <span>{{item}}</span>
+    <div *ngFor="let pesquisa of pesquisasList; trackBy: trackByPesquisa" class="card">
+      <h3>Pesquisa: {{ pesquisa.nome }}</h3>
+      <ul *ngIf="pesquisa.produtos.length > 0; else semProdutos">
+        <li *ngFor="let produto of pesquisa.produtos || []; trackBy: trackByProduto">
+          <span>{{ produto.nome }}</span>
           <input type="checkbox">
         </li>
       </ul>
+      <ng-template #semProdutos>
+        <div class="vazio">Nenhum produto cadastrado</div>
+      </ng-template>
     </div>
 
-    <!-- PPM -->
-    <div class="card">
-      <h3>Pesquisa: PPM</h3>
-      <ul>
-        <li *ngFor="let item of ['Bovino','Bubalino','Ovino','Caprino','Equino']">
-          <span>{{item}}</span>
-          <input type="checkbox">
-        </li>
-      </ul>
-    </div>
-
-    <!-- PEVS -->
-    <div class="card">
-      <h3>Pesquisa: PEVS</h3>
-      <ul>
-        <li *ngFor="let item of ['Açaí','Borracha','Castanha','Carvão','Lenha']">
-          <span>{{item}}</span>
-          <input type="checkbox">
-        </li>
-      </ul>
-    </div>
-
+    <ng-container>
+      <div *ngIf="carregandoPesquisas" class="card-vazio">
+        <p>Carregando pesquisas...</p>
+      </div>
+      <div *ngIf="!carregandoPesquisas && pesquisasList.length === 0" class="card-vazio">
+        <p>Nenhuma pesquisa cadastrada</p>
+      </div>
+    </ng-container>
   </div>
 
   <div class="botoes">
-    <button class="btn vermelho">Voltar</button>
-    <button class="btn verde">Próximo</button>
+    <button class="btn vermelho" (click)="voltar()">Voltar</button>
+    <button class="btn verde" (click)="avancar()">Próximo</button>
   </div>
 
 </div>

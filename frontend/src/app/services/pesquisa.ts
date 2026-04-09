@@ -1,46 +1,46 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, finalize, map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+
+interface ApiListResponse<T> {
+  value?: T[];
+  results?: T[];
+}
+
+export interface ProdutoResumo {
+  id: number;
+  nome: string;
+  pesquisa: number;
+  data_criacao: string;
+}
 
 export interface Pesquisa {
   id: number;
   nome: string;
   data_criacao: string;
-  produtos?: any[];
+  produtos?: ProdutoResumo[];
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class PesquisaService {
-  private apiUrl = 'http://localhost:8000/api/pesquisas/';
+  private apiUrl = `${environment.apiUrl}/api/pesquisas/`;
 
 
   constructor(private http: HttpClient) {}
 
-
-
   getPesquisas(): Observable<Pesquisa[]> {
-    return this.http.get<any>(this.apiUrl).pipe(
-      map((resp) => {
-        console.log('🔍 Pesquisa Response:', resp);
-        let data = resp;
-        if (resp?.value) {
-          data = resp.value;
-          console.log('📦 Extraído de resp.value');
-        } else if (resp?.results) {
-          data = resp.results;
-          console.log('📦 Extraído de resp.results');
-        } else if (!Array.isArray(resp)) {
-          data = [];
-          console.warn('⚠️ Resposta não é array nem tem value/results');
-        }
-        console.log('✅ Dados finais:', data);
-        return Array.isArray(data) ? data : [];
-      }),
+    return this.http.get<Pesquisa[] | ApiListResponse<Pesquisa>>(this.apiUrl).pipe(
+      map((response) => this.extrairLista(response)),
+      map((pesquisas) => pesquisas.map((pesquisa) => ({
+        ...pesquisa,
+        produtos: Array.isArray(pesquisa.produtos) ? pesquisa.produtos : []
+      }))),
       catchError((error) => {
-        console.error('❌ Erro no serviço getPesquisas:', error);
+        console.error('Erro ao buscar pesquisas:', error);
         return of([]);
       })
     );
@@ -56,5 +56,21 @@ export class PesquisaService {
 
   obterPesquisaPorId(id: number): Observable<Pesquisa> {
     return this.http.get<Pesquisa>(`${this.apiUrl}${id}/`);
+  }
+
+  private extrairLista(response: Pesquisa[] | ApiListResponse<Pesquisa>): Pesquisa[] {
+    if (Array.isArray(response)) {
+      return response;
+    }
+
+    if (Array.isArray(response.results)) {
+      return response.results;
+    }
+
+    if (Array.isArray(response.value)) {
+      return response.value;
+    }
+
+    return [];
   }
 }

@@ -20,7 +20,7 @@ export class LoginComponent {
     if (this.username && this.password) {
       console.log('Username:', this.username);
       console.log('Password:', this.password);
-      alert('Login successful!');
+      //alert('Login successful!');
       this.router.navigate(['/main']);
     } else {
       alert('Por favor, preencha todos os campos.');
