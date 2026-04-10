@@ -1,5 +1,30 @@
 from rest_framework import serializers
-from .models import Pesquisa, Produto
+from .models import Informante, Estabelecimento, Item, Questionario, Pesquisa, Produto
+
+
+class InformanteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Informante
+        fields = '__all__'
+
+
+class EstabelecimentoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Estabelecimento
+        fields = '__all__'
+
+
+class ItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Item
+        fields = '__all__'
+
+
+class QuestionarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Questionario
+        fields = '__all__'
+
 
 class ProdutoSerializer(serializers.ModelSerializer):
     pesquisa_nome = serializers.CharField(source='pesquisa.nome', read_only=True)
@@ -8,6 +33,7 @@ class ProdutoSerializer(serializers.ModelSerializer):
         model = Produto
         fields = ['id', 'nome', 'pesquisa', 'pesquisa_nome', 'data_criacao']
         read_only_fields = ['id', 'data_criacao']
+
 
 class PesquisaSerializer(serializers.ModelSerializer):
     produtos = ProdutoSerializer(many=True, read_only=True)

@@ -1,11 +1,3 @@
-# 🚀 Guia de Extensão do Sistema
-
-## 📋 Como Adicionar Novas Funcionalidades
-
-Este guia descreve o passo-a-passo para adicionar novos recursos ao SisAgro mantendo o padrão arquitetural estabelecido.
-
----
-
 ## 1️⃣ Adicionar Nova Entidade (Ex: Propriedade)
 
 ### Passo 1: Criar Model no Backend

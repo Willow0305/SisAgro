@@ -17,8 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import InformanteView, EstabelecimentoView, ItemView, QuestionarioView
-from core.views import PesquisaViewSet, ProdutoViewSet
+from core.views import (
+    InformanteView, EstabelecimentoView, ItemView, QuestionarioView,
+    PesquisaViewSet, ProdutoViewSet,
+)
 
 router = DefaultRouter()
 router.register(r'pesquisas', PesquisaViewSet)
