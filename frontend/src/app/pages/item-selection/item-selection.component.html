@@ -6,16 +6,21 @@
     {{ erroCarregamento }}
   </div>
 
+  <!-- DEBUG (pode remover depois) -->
+  <!-- <pre>{{ pesquisasList | json }}</pre> -->
+
   <div class="grid">
 
     <div *ngFor="let pesquisa of pesquisasList; trackBy: trackByPesquisa" class="card">
       <h3>Pesquisa: {{ pesquisa.nome }}</h3>
-      <ul *ngIf="pesquisa.produtos && pesquisa.produtos.length > 0; else semProdutos">
+
+      <ul *ngIf="(pesquisa.produtos?.length ?? 0) > 0; else semProdutos">
         <li *ngFor="let produto of pesquisa.produtos; trackBy: trackByProduto">
           <span>{{ produto.nome }}</span>
           <input type="checkbox">
         </li>
       </ul>
+
       <ng-template #semProdutos>
         <div class="vazio">Nenhum produto cadastrado</div>
       </ng-template>

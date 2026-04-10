@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -15,7 +15,7 @@ interface Pesquisa {
   id: number;
   nome: string;
   data_criacao: string;
-  produtos: Produto[];
+  produtos?: Produto[];
 }
 
 @Component({
@@ -32,7 +32,8 @@ export class ItemSelectionComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -46,8 +47,15 @@ export class ItemSelectionComponent implements OnInit {
     this.http.get<Pesquisa[]>(`${environment.apiUrl}/api/pesquisas/`).subscribe({
       next: (dados) => {
         console.log('Pesquisas recebidas:', dados);
-        this.pesquisasList = Array.isArray(dados) ? dados : [];
+
+        // 🔥 GARANTE QUE SEMPRE EXISTA ARRAY DE PRODUTOS
+        this.pesquisasList = (dados || []).map(p => ({
+          ...p,
+          produtos: p.produtos || []
+        }));
+
         this.carregandoPesquisas = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Erro ao carregar pesquisas:', err);
