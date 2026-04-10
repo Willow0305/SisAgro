@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [class.modal-open]="temModalAberta">
 
   <!-- HEADER -->
   <header class="topbar">
@@ -46,11 +46,11 @@
       </div>
 
       <div class="botoes">
-        <button>Novo Informante</button>
-        <button>Relatórios</button>
-        <button>+ Produto</button>
+        <button class="novoInformante" (click)="novoInformante()">Novo Informante</button>
         <button>Novo Estabelecimento</button>
-        <button>Nova Pesquisa</button>
+        <button (click)="novaPesquisa()">Nova Pesquisa</button>
+        <button (click)="novoProduto()">Novo Produto</button>
+        <button>Relatórios</button>
       </div>
     </div>
 
@@ -64,4 +64,9 @@
     </div>
 
   </div>
+
+  <!-- MODAIS -->
+  <app-modal-pesquisa *ngIf="modalPesquisaAberta" (fecharModal)="fecharModalPesquisa()"></app-modal-pesquisa>
+  <app-modal-produto *ngIf="modalProdutoAberta" (fecharModal)="fecharModalProduto()"></app-modal-produto>
+
 </div>

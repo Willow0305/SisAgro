@@ -1,8 +1,6 @@
 # SisAgro
 Iniciar Back-end
-    cd backend
-    cd SisAgro
-    .venv\Scripts\activate
+    cd backend/SisAgro
     python manage.py runserver
 
 Iniciar Front-end
